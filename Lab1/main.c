@@ -1,13 +1,13 @@
-<<<<<<< HEAD
-#include "add.h"
+
+#include "add.c"
 
 int main(void)
 {
-    return 0;
+    int a = 1;
+    int b = 2;
+    int c = 0;
+    
+    c = add(a, b);
+    return c;
 }
-=======
-int main(void)
-{
-    return 0;
-}
->>>>>>> 254882168f24ec8cf35f02c5262ec703115eeaf9
+
