@@ -7,13 +7,16 @@ size_t score_player2 = 0;
 size_t board[15][15] = { 0, };
 
 void init_game(void) { /*게임 초기화*/
-	size_t i, j;
-	total_row, total_col = 15;
-	score_player1, score_player2 = 0;
+	size_t i;
+    size_t j;
+    total_row = 15;
+    total_col = 15;
+    score_player1 = 0;
+    score_player2 = 0;
 
     for (i = 0; i < total_row; i++) {
         for (j = 0; j < total_col; j++) {
-            board[total_row][total_col] = 13;
+            board[i][j] = 13;
         }
     }
 
