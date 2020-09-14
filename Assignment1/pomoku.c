@@ -164,8 +164,24 @@ int insert_column(const color_t color, const size_t col) {
     }
 }
 
-int remove_row(const color_t color, const size_t row) {
-
+int remove_row(const color_t color, const size_t row) { /* 선택 행 삭제 */
+    size_t i, j;
+    if (color == COLOR_BLACK) {
+        for (i = row + 1; i i <= total_row - 1; i++) {
+            for (j = 0; j < total_col; j++) {
+                board[i - 1][j] = board[i][j];
+            }
+        }
+        total_row -= 1;
+        /* 배열 삭제 아직 안했음 */
+        return TRUE;
+    }
+    else if (color == COLOR_WHITE) {
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
 }
 
 int remove_column(const color_t color, const size_t col);
