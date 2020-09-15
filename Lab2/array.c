@@ -138,7 +138,7 @@ int insert(int numbers[], const size_t element_count, const int num, const size_
 {
 	size_t i;
 	size_t count = 0;
-	if (pos > (int)element_count-1 || pos < 0)
+	if ((int)pos > (int)element_count-1 || pos < 0)
 	{
 		return FALSE;
 	}
@@ -165,7 +165,7 @@ int remove_at(int numbers[], const size_t element_count, const size_t index)
 {
 	size_t i;
 	size_t count = 0;
-	if (index > element_count || index < 0) 
+	if ((int)index > (int)element_count - 1 || index < 0) 
 	{
 		return FALSE;
 	}
