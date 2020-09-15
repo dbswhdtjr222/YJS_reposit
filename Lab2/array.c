@@ -83,7 +83,23 @@ int is_all_positive(const int numbers[], const size_t element_count)
 {
 	size_t i;
 	size_t count = 0;
-	for (i = 0; i < element_count; i++) {
+	for (i = 0; i < element_count; i++)
+	{
+		if (numbers[i] == INT_MIN || numbers[i] == INT_MAX)
+		{
+			count++;
+		}
+	}
+	if (count == element_count)
+	{
+		return FALSE;
+	}
+	else
+	{
+		count = 0;
+	}
+	for (i = 0; i < element_count; i++) 
+	{
 		if (numbers[i] >= 0)
 		{
 			count++;
