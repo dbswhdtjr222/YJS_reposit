@@ -18,14 +18,14 @@ int get_index_of(const int numbers[], const size_t element_count, const int num)
 
 int get_last_index_of(const int numbers[], const size_t element_count, const int num) 
 {
-	size_t i;
-	int INDEX = 0;
-	for (i = element_count - 1; i >= 0; i--) 
+	int i;
+	int index = 0;
+	for (i = (int)element_count - 1; i >= 0; i--) 
 	{
 		if (numbers[i] == num) 
 		{
-			INDEX = i;
-			return INDEX;
+			index = i;
+			return index;
 		}
 	}
 	return -1;
