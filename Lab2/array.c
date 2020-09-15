@@ -1,11 +1,14 @@
 #include "array.h"
 #include <limits.h>
 
-int get_index_of(const int numbers[], const size_t element_count, const int num) {
+int get_index_of(const int numbers[], const size_t element_count, const int num) 
+{
 	size_t i;
 	int index = 0;
-	for (i = 0; i < element_count; i++) {
-		if (numbers[i] == num) {
+	for (i = 0; i < element_count; i++) 
+	{
+		if (numbers[i] == num) 
+		{
 			index = i;
 			return index;
 		}
@@ -13,11 +16,14 @@ int get_index_of(const int numbers[], const size_t element_count, const int num)
 	return -1;
 }
 
-int get_last_index_of(const int numbers[], const size_t element_count, const int num) {
+int get_last_index_of(const int numbers[], const size_t element_count, const int num) 
+{
 	size_t i;
 	int index = 0;
-	for (i = element_count; i >= 0; i--) {
-		if (numbers[i] == num) {
+	for (i = element_count-1; i >= 0; i--) 
+	{
+		if (numbers[i] == num) 
+		{
 			index = i;
 			return index;
 		}
@@ -25,15 +31,19 @@ int get_last_index_of(const int numbers[], const size_t element_count, const int
 	return -1;
 }
 
-int get_max_index(const int numbers[], const size_t element_count) {
+int get_max_index(const int numbers[], const size_t element_count) 
+{
 	size_t i;
 	int max_index;
 	int max = INT_MIN+1;
-	if (element_count == 0) {
+	if (element_count == 0) 
+	{
 		return -1;
 	}
-	for (i = 0; i < element_count; i++) {
-		if (numbers[i] > max) {
+	for (i = 0; i < element_count; i++) 
+	{
+		if (numbers[i] > max) 
+		{
 			max = numbers[i];
 			max_index = i;
 		}
@@ -41,21 +51,27 @@ int get_max_index(const int numbers[], const size_t element_count) {
 	return max_index;
 }
 
-int get_min_index(const int numbers[], const size_t element_count) {
+int get_min_index(const int numbers[], const size_t element_count) 
+{
 	size_t i;
 	size_t count = 0;
 	int min_index;
 	int min = INT_MAX-1;
-	for (i = 0; i < element_count; i++) {
-		if (numbers[i] == INT_MAX || numbers[i] == INT_MIN) {
+	for (i = 0; i < element_count; i++) 
+	{
+		if (numbers[i] == INT_MAX || numbers[i] == INT_MIN) 
+		{
 			count += 1;
 		}
 	}
-	if (count == element_count) {
+	if (count == element_count) 
+	{
 		return -1;
 	}
-	for (i = 0; i < element_count; i++) {
-		if (numbers[i] < min) {
+	for (i = 0; i < element_count; i++) 
+	{
+		if (numbers[i] < min) 
+		{
 			min = numbers[i];
 			min_index = i;
 		}
@@ -63,62 +79,80 @@ int get_min_index(const int numbers[], const size_t element_count) {
 	return min_index;
 }
 
-int is_all_positive(const int numbers[], const size_t element_count) {
+int is_all_positive(const int numbers[], const size_t element_count) 
+{
 	size_t i;
-	for (i = 0; i <= element_count; i++) {
-		if (numbers[i] < 0) {
+	for (i = 0; i < element_count; i++) 
+	{
+		if (numbers[i] < 0) 
+		{
 			return FALSE;
 		}
-		else if (numbers[i] >= 0) {
+		else if (numbers[i] >= 0) 
+		{
 			continue;
 		}
 	}
 	return TRUE;
 }
 
-int has_even(const int numbers[], const size_t element_count) {
+int has_even(const int numbers[], const size_t element_count) 
+{
 	size_t i;
-	for (i = 0; i < element_count; i++) {
-		if (numbers[i] % 2 == 0) {
+	for (i = 0; i < element_count; i++) 
+	{
+		if (numbers[i] % 2 == 0) 
+		{
 			return TRUE;
 		}
-		else {
+		else 
+		{
 			continue;
 		}
 	}
 	return FALSE;
 }
 
-int insert(int numbers[], const size_t element_count, const int num, const size_t pos) {
+int insert(int numbers[], const size_t element_count, const int num, const size_t pos) 
+{
 	size_t i;
 	size_t count = 0;
-	for (i = 0; i < element_count; i++) {
-		if (numbers[i] == INT_MIN || numbers[i] == INT_MAX) {
+	for (i = 0; i < element_count; i++) 
+	{
+		if (numbers[i] == INT_MIN || numbers[i] == INT_MAX) 
+		{
 			count += 1;
 		}
 	}
-	if (count == 0 || pos > element_count) {
+	if (count == 0) 
+	{
 		return FALSE;
 	}
-	for (i = element_count; i >= pos; i--) {
+	for (i = element_count; i >= pos; i--) 
+	{
 		numbers[i + 1] = numbers[i];
 	}
 	numbers[pos] = num;
 	return TRUE;
 }
 
-int remove_at(int numbers[], const size_t element_count, const size_t index) {
+int remove_at(int numbers[], const size_t element_count, const size_t index) 
+{
 	size_t i;
 	size_t count = 0;
-	for (i = 0; i < element_count; i++) {
-		if (numbers[i] == INT_MIN || numbers[i] == INT_MAX) {
+	for (i = 0; i < element_count; i++) 
+	{
+		if (numbers[i] == INT_MIN || numbers[i] == INT_MAX) 
+		{
 			count += 1;
 		}
 	}
-	if (count == element_count || index > element_count) {
+	if (count == element_count || index > element_count) 
+	{
 		return FALSE;
 	}
-	for (i = index + 1; i <= element_count - 1; i++) {
+	for (i = index + 1; i <= element_count - 1; i++) 
+	{
 		numbers[i - 1] = numbers[i];
 	}
 	numbers[element_count] = INT_MIN;
