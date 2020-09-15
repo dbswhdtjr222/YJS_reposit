@@ -82,18 +82,23 @@ int get_min_index(const int numbers[], const size_t element_count)
 int is_all_positive(const int numbers[], const size_t element_count) 
 {
 	size_t i;
-	for (i = 0; i < element_count; i++) 
-	{
-		if (numbers[i] < 0) 
+	size_t count = 0;
+	for (i = 0; i < element_count; i++) {
+		if (numbers[i] >= 0)
+		{
+			count++;
+		}
+		else if (numbers[i] < 0)
 		{
 			return FALSE;
 		}
-		else if (numbers[i] >= 0) 
-		{
-			continue;
-		}
 	}
-	return TRUE;
+	if (count == element_count)
+	{
+		return TRUE;
+	}
+
+	return 0;
 }
 
 int has_even(const int numbers[], const size_t element_count) 
@@ -117,6 +122,10 @@ int insert(int numbers[], const size_t element_count, const int num, const size_
 {
 	size_t i;
 	size_t count = 0;
+	if (pos > element_count || pos < 0)
+	{
+		return FALSE;
+	}
 	for (i = 0; i < element_count; i++) 
 	{
 		if (numbers[i] == INT_MIN || numbers[i] == INT_MAX) 
@@ -124,11 +133,10 @@ int insert(int numbers[], const size_t element_count, const int num, const size_
 			count += 1;
 		}
 	}
-	if (count == 0) 
-	{
+	if (count == 0) {
 		return FALSE;
 	}
-	for (i = element_count; i >= pos; i--) 
+	for (i = element_count-1; i >= pos; i--) 
 	{
 		numbers[i + 1] = numbers[i];
 	}
@@ -140,6 +148,10 @@ int remove_at(int numbers[], const size_t element_count, const size_t index)
 {
 	size_t i;
 	size_t count = 0;
+	if (index > element_count || index < 0) 
+	{
+		return FALSE;
+	}
 	for (i = 0; i < element_count; i++) 
 	{
 		if (numbers[i] == INT_MIN || numbers[i] == INT_MAX) 
@@ -147,14 +159,14 @@ int remove_at(int numbers[], const size_t element_count, const size_t index)
 			count += 1;
 		}
 	}
-	if (count == element_count || index > element_count) 
+	if (count == element_count) 
 	{
 		return FALSE;
 	}
-	for (i = index + 1; i <= element_count - 1; i++) 
+	for (i = index + 1; i < element_count; i++) 
 	{
 		numbers[i - 1] = numbers[i];
 	}
-	numbers[element_count] = INT_MIN;
+	numbers[element_count-1] = INT_MIN;
 	return TRUE;
 }
