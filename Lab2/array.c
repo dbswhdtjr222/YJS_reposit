@@ -138,7 +138,7 @@ int insert(int numbers[], const size_t element_count, const int num, const size_
 {
 	size_t i;
 	size_t count = 0;
-	if (pos >= element_count || pos < 0)
+	if (pos >= element_count - 1 || pos < 0) /* pos의 범위가 */
 	{
 		return FALSE;
 	}
