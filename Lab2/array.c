@@ -138,7 +138,7 @@ int insert(int numbers[], const size_t element_count, const int num, const size_
 {
 	size_t i;
 	size_t count = 0;
-	if (pos > element_count || pos < 0)
+	if (pos > (int)element_count-1 || pos < 0)
 	{
 		return FALSE;
 	}
@@ -149,10 +149,11 @@ int insert(int numbers[], const size_t element_count, const int num, const size_
 			count += 1;
 		}
 	}
-	if (count == 0) {
+	if (count == 0) 
+	{
 		return FALSE;
 	}
-	for (i = element_count-1; i >= pos; i--) 
+	for (i = (int)element_count-1; i >= pos; i--) 
 	{
 		numbers[i + 1] = numbers[i];
 	}
