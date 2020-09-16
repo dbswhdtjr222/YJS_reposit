@@ -137,10 +137,7 @@ int has_even(const int numbers[], const size_t element_count)
 int insert(int numbers[], const size_t element_count, const int num, const size_t pos) 
 {
 	int i;
-	if (pos > element_count) /* pos의 범위 0보다 작은 색인은 없으므로 요소의 개수보다 클 때 */
-	{
-		return FALSE;
-	}
+
 	if(pos >= 0 && pos < element_count)
 	{
 		for (i = (int)element_count - 1; i >= (int)pos; i--)
@@ -149,6 +146,10 @@ int insert(int numbers[], const size_t element_count, const int num, const size_
 		}
 		numbers[pos] = num;
 		return TRUE;
+	}
+	else
+	{
+		return FALSE;
 	}
 
 	return 0;
