@@ -59,7 +59,7 @@ int get_min_index(const int numbers[], const size_t element_count)
         return -1;
     }
     for (i = 0; i < element_count; i++) {
-        if (numbers[i] < min){
+        if (numbers[i] < min) {
             min = numbers[i];
             min_index = i;
         }
@@ -82,9 +82,9 @@ int is_all_positive(const int numbers[], const size_t element_count)
         count = 0;
     }
     for (i = 0; i < element_count; i++) {
-        if(numbers[i] >= 0){
+        if(numbers[i] >= 0) {
             count++;
-        } else if(numbers[i] < 0) {
+        } else if (numbers[i] < 0) {
             return FALSE;
         }
     }
