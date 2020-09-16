@@ -138,32 +138,21 @@ int insert(int numbers[], const size_t element_count, const int num, const size_
 {
 	size_t i;
 	size_t count = 0;
-	if (pos < 0) /* pos의 범위 */
+	if (pos < 0 || pos >= element_count) /* pos의 범위 0보다 작은 색인은 없으므로 요소의 개수보다 클 때 */
 	{
 		return FALSE;
 	}
-	for (i = 0; i < element_count; i++) 
+	if(pos >= 0 && pos < element_count)
 	{
-		if (numbers[i] == INT_MIN || numbers[i] == INT_MAX) 
+		for (i = (int)element_count - 1; i >= pos; i--)
 		{
-			count += 1;
+			numbers[i + 1] = numbers[i];
 		}
-	}
-	if (count == 0) 
-	{
-		return FALSE;
-	}
-	if (pos >= element_count) 
-	{
 		numbers[pos] = num;
 		return TRUE;
 	}
-	for (i = (int)element_count-1; i >= pos; i--) 
-	{
-		numbers[i + 1] = numbers[i];
-	}
-	numbers[pos] = num;
-	return TRUE;
+
+	return 0;
 }
 
 int remove_at(int numbers[], const size_t element_count, const size_t index) 
