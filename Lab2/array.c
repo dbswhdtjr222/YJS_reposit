@@ -153,6 +153,11 @@ int insert(int numbers[], const size_t element_count, const int num, const size_
 	{
 		return FALSE;
 	}
+	if (pos >= element_count) 
+	{
+		numbers[pos] = num;
+		return TRUE;
+	}
 	for (i = (int)element_count-1; i >= pos; i--) 
 	{
 		numbers[i + 1] = numbers[i];
