@@ -5,7 +5,7 @@ int get_index_of(const int numbers[], const size_t element_count, const int num)
 {
     size_t i;
     int index = 0;
-    for (i = 0; i < element_count; i++){
+    for (i = 0; i < element_count; i++) {
         if (numbers[i] == num) {
             index = i;
             return index;
@@ -71,12 +71,12 @@ int is_all_positive(const int numbers[], const size_t element_count)
 {
     size_t i;
     size_t count = 0;
-    for (i = 0; i < element_count; i++){
-        if (numbers[i] == INT_MIN || numbers[i] == INT_MAX){
+    for (i = 0; i < element_count; i++) {
+        if (numbers[i] == INT_MIN || numbers[i] == INT_MAX) {
             count++;
         }
     }
-    if (count == element_count){
+    if (count == element_count) {
         return FALSE;
     } else {
         count = 0;
@@ -84,11 +84,11 @@ int is_all_positive(const int numbers[], const size_t element_count)
     for (i = 0; i < element_count; i++) {
         if(numbers[i] >= 0){
             count++;
-        } else if(numbers[i] < 0){
+        } else if(numbers[i] < 0) {
             return FALSE;
         }
     }
-    if (count == element_count){
+    if (count == element_count) {
         return TRUE;
     }
 
@@ -112,8 +112,8 @@ int insert(int numbers[], const size_t element_count, const int num, const size_
 {
     int i;
 
-    if (pos >= 0 && pos <= element_count){
-        for (i = (int)element_count - 1; i >= (int)pos; i--){
+    if (pos >= 0 && pos <= element_count) {
+        for (i = (int)element_count - 1; i >= (int)pos; i--) {
             numbers[i + 1] = numbers[i];
         }
         numbers[pos] = num;
