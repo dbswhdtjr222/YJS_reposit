@@ -6,7 +6,8 @@ size_t score_player1 = 0;
 size_t score_player2 = 0;
 size_t board[15][15] = { 0, };
 
-void init_game(void) { /*°ÔÀÓ ÃÊ±âÈ­*/
+void init_game(void) 
+{ /*ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­*/
 	size_t i;
     size_t j;
     total_row = 15;
@@ -23,173 +24,329 @@ void init_game(void) { /*°ÔÀÓ ÃÊ±âÈ­*/
 }
 
 
-size_t get_row_count(void) {
+size_t get_row_count(void) 
+{
     return total_row;
 }
 
-size_t get_column_count(void) {
+size_t get_column_count(void) 
+{
     return total_col;
 }
 
-int get_score(const color_t color) { /*»öº° Á¡¼ö È®ÀÎ*/
+int get_score(const color_t color) 
+{ /*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½*/
     if (color == COLOR_BLACK) {
         return score_player1;
-    }
-    else if (color == COLOR_WHITE) {
+    } else if (color == COLOR_WHITE) {
         return score_player2;
-    }
-    else {
+    } else {
         return -1;
     }
+
+    return 0;
 }
 
-int get_color(const size_t row, const size_t col) { /*»ö È®ÀÎ*/
+int get_color(const size_t row, const size_t col) 
+{ /*ï¿½ï¿½ È®ï¿½ï¿½*/
     if (board[row][col] == COLOR_BLACK) {
         return 0;
-    }
-    else if (board[row][col] == COLOR_WHITE) {
+    } else if (board[row][col] == COLOR_WHITE) {
         return 1;
-    }
-    else {
+    } else {
         return -1;
     }
+    
+    return 0;
 }
 
-int is_placeable(const size_t row, const size_t col) {
+int is_placeable(const size_t row, const size_t col) 
+{
     if (board[row][col] == 13) {
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
+
+    return 0;
 }
 
-int place_stone(const color_t color, const size_t row, const size_t col) {
+int place_stone(const color_t color, const size_t row, const size_t col) 
+{
     if (board[row][col] == COLOR_BLACK) {
         return FALSE;
-    }
-    else if (board[row][col] == COLOR_WHITE) {
+    } else if (board[row][col] == COLOR_WHITE) {
         return FALSE;
-    }
-    else {
+    } else {
         board[row][col] = color;
         return TRUE;
     }
+
+    return 0;
 }
 
 /* special moves */
-int insert_row(const color_t color, const size_t row) {
+int insert_row(const color_t color, const size_t row) 
+{
     size_t i;
     size_t j;
-    if (color == COLOR_BLACK) { /* µé¾î¿Â »öÀÌ °ËÁ¤»öÀÌ¶ó¸é */
-        if (total_row > 20) { /* ´Ã¾î³­ ÇàÀÇ ¼ö°¡ 20À» ³Ñ´Â´Ù¸é */
+    if (color == COLOR_BLACK) { /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ */
+        if (total_row > 20) { /* ï¿½Ã¾î³­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 20ï¿½ï¿½ ï¿½Ñ´Â´Ù¸ï¿½ */
             return FALSE;
         }
 
-        for (i = total_row - 1; i >= row; i--) { /* º¸µåÀÇ ÃÖ´ë Çà - 1 ºÎÅÍ ³ÖÀ»·Á´Â Çà±îÁöÀÇ ¹è¿­ÀÇ °ªµéÀ» ¿À¸¥ÂÊÀ¸·Î µ¤¾îÁÙ °ÍÀÓ*/
-            for (j = 0; j < total_col; j++) { /*Çà¸¸ °Çµå´Â °ÍÀÌ¹Ç·Î*/
-                board[i + 1][j] = board[i][j]; /* µ¤¾îÁÖ±â */
+        for (i = total_row - 1; i >= row; i--) { /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ - 1 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
+            for (j = 0; j < total_col; j++) { /*ï¿½à¸¸ ï¿½Çµï¿½ï¿½ ï¿½ï¿½ï¿½Ì¹Ç·ï¿½*/
+                board[i + 1][j] = board[i][j]; /* ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ */
             }
         }
-        for (j = 0; j < total_col; j++) { /* ³ÖÀ»·Á´Â ÇàÀÇ °ª 13À¸·Î ÃÊ±âÈ­*/
+        for (j = 0; j < total_col; j++) { /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 13ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­*/
             board[row][j] = 13;
         }
         total_row += 1;
         score_player1 -= 3;
         return TRUE;
-    }
-    else if (color == COLOR_WHITE) { /*µé¾î¿Â »öÀÌ ÇÏ¾á»öÀÌ¶ó¸é */
-        if (total_row > 20) { /* ´Ã¾î³­ ÇàÀÇ ¼ö°¡ 20À» ³Ñ´Â´Ù¸é */
+    } else if (color == COLOR_WHITE) { /*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¾ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ */
+        if (total_row > 20) { /* ï¿½Ã¾î³­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 20ï¿½ï¿½ ï¿½Ñ´Â´Ù¸ï¿½ */
             return FALSE;
         }
 
-        for (i = total_row - 1; i >= row; i--) { /* º¸µåÀÇ ÃÖ´ë Çà - 1 ºÎÅÍ ³ÖÀ»·Á´Â Çà±îÁöÀÇ ¹è¿­ÀÇ °ªµéÀ» µ¤¾îÁÙ °ÍÀÓ*/
-            for (j = 0; j < total_col; j++) { /*Çà¸¸ °Çµå´Â °ÍÀÌ¹Ç·Î*/
-                board[i + 1][j] = board[i][j]; /* µ¤¾îÁÖ±â */
+        for (i = total_row - 1; i >= row; i--) { /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ - 1 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
+            for (j = 0; j < total_col; j++) { /*ï¿½à¸¸ ï¿½Çµï¿½ï¿½ ï¿½ï¿½ï¿½Ì¹Ç·ï¿½*/
+                board[i + 1][j] = board[i][j]; /* ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ */
             }
         }
-        for (j = 0; j < total_col; j++) { /* ³ÖÀ»·Á´Â Çà 13À¸·Î ÃÊ±âÈ­*/
+        for (j = 0; j < total_col; j++) { /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 13ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­*/
             board[row][j] = 13;
         }
         total_row += 1;
         score_player2 -= 3;
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
+
+    return 0;
 }
 
-int insert_column(const color_t color, const size_t col) {
-    if (color == COLOR_BLACK) { /* µé¾î¿Â »öÀÌ °ËÁ¤»öÀÌ¶ó¸é */
+int insert_column(const color_t color, const size_t col) 
+{
+    if (color == COLOR_BLACK) { /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ */
         size_t i;
         size_t j;
 
-        if (total_col > 20) { /* col±æÀÌ°¡ 20À» ³Ñ´Â´Ù¸é */
+        if (total_col > 20) { /* colï¿½ï¿½ï¿½Ì°ï¿½ 20ï¿½ï¿½ ï¿½Ñ´Â´Ù¸ï¿½ */
             return FALSE;
         }
-        for (i = 0; i < total_row; i++) { /* ¿­¸¸ °Çµå´Â °Í*/
-            for (j = total_col - 1; j >= col; j--) { /* º¸µåÀÇ ÃÖ´ë ¿­ - 1 ºÎÅÍ ³ÖÀ»·Á´Â ¿­±îÁöÀÇ ¹è¿­ÀÇ °ªµéÀ» µ¤¾îÁÙ °ÍÀÓ*/
-                board[i][j + 1] = board[i][j]; /* µ¤±â */
+        for (i = 0; i < total_row; i++) { /* ï¿½ï¿½ï¿½ï¿½ ï¿½Çµï¿½ï¿½ ï¿½ï¿½*/
+            for (j = total_col - 1; j >= col; j--) { /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ - 1 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
+                board[i][j + 1] = board[i][j]; /* ï¿½ï¿½ï¿½ï¿½ */
             }
         }
-        for (i = 0; i < total_row; i++) { /* ³ÖÀ»·Á´Â ¿­ 13À¸·Î ÃÊ±âÈ­ */
+        for (i = 0; i < total_row; i++) { /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 13ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ */
             board[i][col] = 13;
         }
         total_col += 1;
         score_player1 -= 3;
+
         return TRUE;
-    }
-    else if (color == COLOR_WHITE) {
+    } else if (color == COLOR_WHITE) {
         size_t i;
         size_t j;
 
-        if (total_col > 20) { /* col±æÀÌ°¡ 20À» ³Ñ´Â´Ù¸é */
+        if (total_col > 20) { /* colï¿½ï¿½ï¿½Ì°ï¿½ 20ï¿½ï¿½ ï¿½Ñ´Â´Ù¸ï¿½ */
             return FALSE;
         }
-        for (i = 0; i < total_row; i++) { /* ¿­¸¸ °Çµå´Â °Í*/
-            for (j = total_col - 1; j >= col; j--) { /* º¸µåÀÇ ÃÖ´ë ¿­ - 1 ºÎÅÍ ³ÖÀ»·Á´Â ¿­±îÁöÀÇ ¹è¿­ÀÇ °ªµéÀ» µ¤¾îÁÙ °ÍÀÓ*/
-                board[i][j + 1] = board[i][j]; /* µ¤±â */
+        for (i = 0; i < total_row; i++) { /* ï¿½ï¿½ï¿½ï¿½ ï¿½Çµï¿½ï¿½ ï¿½ï¿½*/
+            for (j = total_col - 1; j >= col; j--) { /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ - 1 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
+                board[i][j + 1] = board[i][j]; /* ï¿½ï¿½ï¿½ï¿½ */
             }
         }
-        for (i = 0; i < total_row; i++) { /* ³ÖÀ»·Á´Â ¿­ 13À¸·Î ÃÊ±âÈ­ */
+        for (i = 0; i < total_row; i++) { /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 13ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ */
             board[i][col] = 13;
         }
         total_col += 1;
         score_player2 -= 3;
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
+
+    return 0;
 }
 
-int remove_row(const color_t color, const size_t row) { /* ¼±ÅÃ Çà »èÁ¦ */
+int remove_row(const color_t color, const size_t row) 
+{ /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
     size_t i, j;
     if (color == COLOR_BLACK) {
-        for (i = row + 1; i i <= total_row - 1; i++) {
+        for (i = row + 1; i <= total_row - 1; i++) {
             for (j = 0; j < total_col; j++) {
                 board[i - 1][j] = board[i][j];
             }
         }
         total_row -= 1;
-        /* ¹è¿­ »èÁ¦ ¾ÆÁ÷ ¾ÈÇßÀ½ */
+        score_player1 -= 3;
         return TRUE;
-    }
-    else if (color == COLOR_WHITE) {
+    } else if (color == COLOR_WHITE) {
+        for (i = row + 1; i <= total_row - 1; i++) {
+            for (j = 0; j < total_col; j++) {
+                board[i - 1][j] = board[i][j];
+            }
+        }
+        total_row -= 1;
+        score_player2 -= 3;
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
+    return 0;
 }
 
-int remove_column(const color_t color, const size_t col);
+int remove_column(const color_t color, const size_t col)
+{
+    size_t i;
+    size_t j;
+    if(col >= total_col || col < 0) {
+        return FALSE;
+    }
+    if (color == COLOR_BLACK) { /* í–‰ ì§„í–‰í•˜ë©´ì„œ ì—´ ê°’ë“¤ ì•žìœ¼ë¡œ ë•¡ê²¨ì£¼ê¸°  */
+        for (i = 0; i < total_row; i++) {
+            for (j = total_col - 1; j >= col; j--) {
+                board[i][j-1] = board[i][j];
+            }
+        }
+        total_col -= 1;
+        score_player1 -= 3;
+        return TRUE;
+    } else if(color == COLOR_WHITE) {
+        for (i = 0; i < total_row; i++) {
+            for (j = total_col - 1; j >= col; j--) {
+                board[i][j-1] = board[i][j];
+            }
+        }
+        total_col -= 1;
+        score_player2 -= 3;
+        return TRUE;
+    }
 
-int swap_rows(const color_t color, const size_t row0, const size_t row1);
+    return 0;
+}
 
-int swap_columns(const color_t color, const size_t col0, const size_t col1);
+int swap_rows(const color_t color, const size_t row0, const size_t row1)
+{
+    size_t i;
+    size_t tmp[20] = {0, };
 
-int copy_row(const color_t color, const size_t src, const size_t dst);
+    if((row1 >= total_row || row0 >= total_row) || (row1 < 0 || row0 < 0)) {
+        return FALSE;
+    }
+    if (color == COLOR_BLACK) {
+        for (i = 0; i < total_col; i++) {
+            tmp[i] = board[row0][i];
+            board[row0][i] = board[row1][i]; 
+        }
+        for (i = 0; i < total_col; i++) {
+            board[row1][i] = tmp[i];
+        }
+        score_player1 -= 2;
 
-int copy_column(const color_t color, const size_t src, const size_t dst);
+        return TRUE;
+    } else if (color == COLOR_WHITE) {
+        for (i = 0; i < total_col; i++) {
+            tmp[i] = board[row0][i];
+            board[row0][i] = board[row1][i]; 
+        }
+        for (i = 0; i < total_col; i++) {
+            board[row1][i] = tmp[i];
+        }
+        score_player2 -= 2;
+
+        return TRUE;
+    }
+
+    return 0;
+}
+
+int swap_columns(const color_t color, const size_t col0, const size_t col1)
+{
+    size_t i;
+    size_t tmp[20] = {0, };
+
+    if ((col1 >= total_col || col0 >= total_col) || (col1 < 0 || col0 < 0)) {
+        return FALSE;
+    }
+    if (color == COLOR_BLACK) {
+        for (i = 0; i < total_row; i++) {
+            tmp[i] = board[i][col0];
+            board[i][col0] = board[i][col1];
+        }
+        for (i = 0; i < total_row; i++) {
+            board[i][col1] = tmp[i];
+        }
+        score_player1 -= 2;
+
+        return TRUE;
+    } else if (color == COLOR_WHITE) {
+               for (i = 0; i < total_row; i++) {
+            tmp[i] = board[i][col0];
+            board[i][col0] = board[i][col1];
+        }
+        for (i = 0; i < total_row; i++) {
+            board[i][col1] = tmp[i];
+        }
+        score_player2 -= 2;
+
+        return TRUE;
+    }
+    
+    return 0;
+}
+
+int copy_row(const color_t color, const size_t src, const size_t dst) /* ì›ë³¸ src íƒ€ê²Ÿ dst */
+{
+    size_t i;
+    if ((src >= total_row || dst >= total_row) || (src < 0 || dst < 0)) {
+        return FALSE;
+    }
+    if (color == COLOR_BLACK) {
+        for (i = 0; i < total_col; i++) {
+            board[dst][i] = board[src][i];
+        }
+        score_player1 -= 4;
+
+        return TRUE;
+    } else if (color == COLOR_WHITE) {
+            for (i = 0; i < total_col; i++) {
+            board[dst][i] = board[src][i];
+        }
+        score_player2 -= 4;
+
+        return TRUE;
+    }
+
+    return 0;
+}
+
+int copy_column(const color_t color, const size_t src, const size_t dst) {
+    size_t i;
+    if ((src >= total_col || dst >= total_col) || (src < 0 || dst < 0)) {
+        return FALSE;
+    }
+    if (color == COLOR_BLACK) {
+        for (i = 0; total_row; i++) {
+            board[i][dst] = board[i][src]; 
+        }
+        score_player1 -= 4;
+
+        return TRUE;
+    } else if (color == COLOR_WHITE) {
+        for (i = 0; total_row; i++) {
+            board[i][dst] = board[i][src]; 
+        }
+        score_player2 -= 4;
+
+        return TRUE;
+    }
+
+    return 0;
+}
