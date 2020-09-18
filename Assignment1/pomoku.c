@@ -139,7 +139,7 @@ int insert_column(const color_t color, const size_t col)
             return FALSE;
         }
         for (i = 0; i < total_row; i++) { /* ���� �ǵ�� ��*/
-            for (j = total_col - 1; j >= col; j--) { /* ������ �ִ� �� - 1 ���� �������� �������� �迭�� ������ ������ ����*/
+            for (j = (int)total_col - 1; j >= col; j--) { /* ������ �ִ� �� - 1 ���� �������� �������� �迭�� ������ ������ ����*/
                 board[i][j + 1] = board[i][j]; /* ���� */
             }
         }
@@ -158,7 +158,7 @@ int insert_column(const color_t color, const size_t col)
             return FALSE;
         }
         for (i = 0; i < total_row; i++) { /* ���� �ǵ�� ��*/
-            for (j = total_col - 1; j >= col; j--) { /* ������ �ִ� �� - 1 ���� �������� �������� �迭�� ������ ������ ����*/
+            for (j = (int)total_col - 1; j >= col; j--) { /* ������ �ִ� �� - 1 ���� �������� �������� �迭�� ������ ������ ����*/
                 board[i][j + 1] = board[i][j]; /* ���� */
             }
         }
@@ -179,7 +179,7 @@ int remove_row(const color_t color, const size_t row)
 { /* ���� �� ���� */
     size_t i, j;
     if (color == COLOR_BLACK) {
-        for (i = row + 1; i <= total_row - 1; i++) {
+        for (i = (int)row + 1; i <= total_row - 1; i++) {
             for (j = 0; j < total_col; j++) {
                 board[i - 1][j] = board[i][j];
             }
@@ -188,7 +188,7 @@ int remove_row(const color_t color, const size_t row)
         score_player1 -= 3;
         return TRUE;
     } else if (color == COLOR_WHITE) {
-        for (i = row + 1; i <= total_row - 1; i++) {
+        for (i = (int)row + 1; i <= total_row - 1; i++) {
             for (j = 0; j < total_col; j++) {
                 board[i - 1][j] = board[i][j];
             }
@@ -211,7 +211,7 @@ int remove_column(const color_t color, const size_t col)
     }
     if (color == COLOR_BLACK) { /* 행 진행하면서 열 값들 앞으로 땡겨주기  */
         for (i = 0; i < total_row; i++) {
-            for (j = total_col - 1; j >= col; j--) {
+            for (j = (int)total_col - 1; j >= col; j--) {
                 board[i][j-1] = board[i][j];
             }
         }
