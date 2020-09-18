@@ -1,7 +1,7 @@
 
 #include <assert.h>
 #include "pomoku.h"
-#include "pomoku.c"
+
 
 void test_init_game(void);
 void test_horizontal_chain(void);

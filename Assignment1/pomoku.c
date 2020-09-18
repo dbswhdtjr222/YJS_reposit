@@ -95,7 +95,7 @@ int insert_row(const color_t color, const size_t row)
             return FALSE;
         }
 
-        for (i = total_row - 1; i >= row; i--) { /* ������ �ִ� �� - 1 ���� �������� ������� �迭�� ������ ���������� ������ ����*/
+        for (i = (int)total_row - 1; i >= row; i--) { /* ������ �ִ� �� - 1 ���� �������� ������� �迭�� ������ ���������� ������ ����*/
             for (j = 0; j < total_col; j++) { /*�ุ �ǵ�� ���̹Ƿ�*/
                 board[i + 1][j] = board[i][j]; /* �����ֱ� */
             }
@@ -111,7 +111,7 @@ int insert_row(const color_t color, const size_t row)
             return FALSE;
         }
 
-        for (i = total_row - 1; i >= row; i--) { /* ������ �ִ� �� - 1 ���� �������� ������� �迭�� ������ ������ ����*/
+        for (i = (int)total_row - 1; i >= row; i--) { /* ������ �ִ� �� - 1 ���� �������� ������� �迭�� ������ ������ ����*/
             for (j = 0; j < total_col; j++) { /*�ุ �ǵ�� ���̹Ƿ�*/
                 board[i + 1][j] = board[i][j]; /* �����ֱ� */
             }
