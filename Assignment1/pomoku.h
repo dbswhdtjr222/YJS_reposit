@@ -8,7 +8,7 @@ extern size_t total_row;
 extern size_t total_column;
 extern size_t score_player1;
 extern size_t score_player2;
-extern size_t board[15][15];
+extern size_t board[20][20];
 
 typedef enum color {COLOR_BLACK, COLOR_WHITE} color_t;
 

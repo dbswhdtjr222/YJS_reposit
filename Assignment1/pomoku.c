@@ -4,7 +4,7 @@ size_t total_row = 15;
 size_t total_col = 15;
 size_t score_player1 = 0;
 size_t score_player2 = 0;
-size_t board[15][15] = { 0, };
+size_t board[20][20] = { 0, };
 
 void init_game(void) 
 { /*���� �ʱ�ȭ*/
@@ -35,7 +35,7 @@ size_t get_column_count(void)
 }
 
 int get_score(const color_t color) 
-{ /*���� ���� Ȯ��*/
+{
     if (color == COLOR_BLACK) {
         return score_player1;
     } else if (color == COLOR_WHITE) {
@@ -90,36 +90,35 @@ int insert_row(const color_t color, const size_t row)
 {
     int i;
     size_t j;
-    if (color == COLOR_BLACK) { /* ���� ���� �������̶�� */
+    if (color == COLOR_BLACK) { 
         if (row >= total_row || row < 0) {
             return FALSE;
         }
-        if (total_row > 20) { /* �þ ���� ���� 20�� �Ѵ´ٸ� */
+        if (total_row > 20) { 
             return FALSE;
         }
 
-        for (i = (int)total_row - 1; i >= row; i--) { /* ������ �ִ� �� - 1 ���� �������� ������� �迭�� ������ ���������� ������ ����*/
-            for (j = 0; j < total_col; j++) { /*�ุ �ǵ�� ���̹Ƿ�*/
-                board[i + 1][j] = board[i][j]; /* �����ֱ� */
+        for (i = (int)total_row - 1; i >= (int)row; i--) { 
+            for (j = 0; j < total_col; j++) { 
+                board[i + 1][j] = board[i][j]; 
             }
         }
-        for (j = 0; j < total_col; j++) { /* �������� ���� �� 13���� �ʱ�ȭ*/
-            board[row][j] = 13;
+        for (j = 0; j < total_col; j++) { 
         }
         total_row += 1;
         score_player1 -= 3;
         return TRUE;
-    } else if (color == COLOR_WHITE) { /*���� ���� �Ͼ���̶�� */
-        if (total_row > 20) { /* �þ ���� ���� 20�� �Ѵ´ٸ� */
+    } else if (color == COLOR_WHITE) { 
+        if (total_row > 20) { 
             return FALSE;
         }
 
-        for (i = (int)total_row - 1; i >= row; i--) { /* ������ �ִ� �� - 1 ���� �������� ������� �迭�� ������ ������ ����*/
-            for (j = 0; j < total_col; j++) { /*�ุ �ǵ�� ���̹Ƿ�*/
-                board[i + 1][j] = board[i][j]; /* �����ֱ� */
+        for (i = (int)total_row - 1; i >= (int)row; i--) { 
+            for (j = 0; j < total_col; j++) {
+                board[i + 1][j] = board[i][j]; 
             }
         }
-        for (j = 0; j < total_col; j++) { /* �������� �� 13���� �ʱ�ȭ*/
+        for (j = 0; j < total_col; j++) { 
             board[row][j] = 13;
         }
         total_row += 1;
@@ -134,19 +133,19 @@ int insert_row(const color_t color, const size_t row)
 
 int insert_column(const color_t color, const size_t col) 
 {
-    if (color == COLOR_BLACK) { /* ���� ���� �������̶�� */
+    if (color == COLOR_BLACK) { 
         size_t i;
         int j;
 
-        if (total_col > 20) { /* col���̰� 20�� �Ѵ´ٸ� */
+        if (total_col > 20) { 
             return FALSE;
         }
-        for (i = 0; i < total_row; i++) { /* ���� �ǵ�� ��*/
-            for (j = (int)total_col - 1; j >= col; j--) { /* ������ �ִ� �� - 1 ���� �������� �������� �迭�� ������ ������ ����*/
-                board[i][j + 1] = board[i][j]; /* ���� */
+        for (i = 0; i < total_row; i++) {
+            for (j = (int)total_col - 1; j >= (int)col; j--) { 
+                board[i][j + 1] = board[i][j]; 
             }
         }
-        for (i = 0; i < total_row; i++) { /* �������� �� 13���� �ʱ�ȭ */
+        for (i = 0; i < total_row; i++) { 
             board[i][col] = 13;
         }
         total_col += 1;
@@ -157,15 +156,15 @@ int insert_column(const color_t color, const size_t col)
         size_t i;
         int j;
 
-        if (total_col > 20) { /* col���̰� 20�� �Ѵ´ٸ� */
+        if (total_col > 20) { 
             return FALSE;
         }
-        for (i = 0; i < total_row; i++) { /* ���� �ǵ�� ��*/
-            for (j = (int)total_col - 1; j >= col; j--) { /* ������ �ִ� �� - 1 ���� �������� �������� �迭�� ������ ������ ����*/
-                board[i][j + 1] = board[i][j]; /* ���� */
+        for (i = 0; i < total_row; i++) { 
+            for (j = (int)total_col - 1; j >= (int)col; j--) { 
+                board[i][j + 1] = board[i][j]; 
             }
         }
-        for (i = 0; i < total_row; i++) { /* �������� �� 13���� �ʱ�ȭ */
+        for (i = 0; i < total_row; i++) { 
             board[i][col] = 13;
         }
         total_col += 1;
@@ -179,11 +178,11 @@ int insert_column(const color_t color, const size_t col)
 }
 
 int remove_row(const color_t color, const size_t row) 
-{ /* ���� �� ���� */
+{ 
     int i;
     size_t j;
     if (color == COLOR_BLACK) {
-        for (i = (int)row + 1; i <= total_row - 1; i++) {
+        for (i = (int)row + 1; i <= (int)total_row - 1; i++) {
             for (j = 0; j < total_col; j++) {
                 board[i - 1][j] = board[i][j];
             }
@@ -192,7 +191,7 @@ int remove_row(const color_t color, const size_t row)
         score_player1 -= 3;
         return TRUE;
     } else if (color == COLOR_WHITE) {
-        for (i = (int)row + 1; i <= total_row - 1; i++) {
+        for (i = (int)row + 1; i <= (int)total_row - 1; i++) {
             for (j = 0; j < total_col; j++) {
                 board[i - 1][j] = board[i][j];
             }
@@ -215,7 +214,7 @@ int remove_column(const color_t color, const size_t col)
     }
     if (color == COLOR_BLACK) { /* 행 진행하면서 열 값들 앞으로 땡겨주기  */
         for (i = 0; i < total_row; i++) {
-            for (j = (int)total_col - 1; j >= col; j--) {
+            for (j = (int)total_col - 1; j >= (int)col; j--) {
                 board[i][j-1] = board[i][j];
             }
         }
@@ -224,7 +223,7 @@ int remove_column(const color_t color, const size_t col)
         return TRUE;
     } else if(color == COLOR_WHITE) {
         for (i = 0; i < total_row; i++) {
-            for (j = total_col - 1; j >= col; j--) {
+            for (j = total_col - 1; j >= (int)col; j--) {
                 board[i][j-1] = board[i][j];
             }
         }
