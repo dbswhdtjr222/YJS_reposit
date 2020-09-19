@@ -209,7 +209,7 @@ int remove_column(const color_t color, const size_t col)
 {
     size_t i;
     int j;
-    if(col >= g_total_col || col < 0) {
+    if (col >= g_total_col || col < 0) {
         return FALSE;
     }
     if (color == COLOR_BLACK) { /* 행 진행하면서 열 값들 앞으로 땡겨주기  */
@@ -221,7 +221,7 @@ int remove_column(const color_t color, const size_t col)
         g_total_col -= 1;
         g_score_player1 -= 3;
         return TRUE;
-    } else if(color == COLOR_WHITE) {
+    } else if (color == COLOR_WHITE) {
         for (i = 0; i < g_total_row; i++) {
             for (j = g_total_col - 2; j >= (int)col; j--) {
                 g_board[i][j - 1] = g_board[i][j];
@@ -240,7 +240,7 @@ int swap_rows(const color_t color, const size_t row0, const size_t row1)
     size_t i;
     size_t tmp[20] = {0, };
 
-    if((row1 >= g_total_row || row0 >= g_total_row) || (row1 < 0 || row0 < 0)) {
+    if ((row1 >= g_total_row || row0 >= g_total_row) || (row1 < 0 || row0 < 0)) {
         return FALSE;
     }
     if (color == COLOR_BLACK) {
@@ -290,7 +290,7 @@ int swap_columns(const color_t color, const size_t col0, const size_t col1)
 
         return TRUE;
     } else if (color == COLOR_WHITE) {
-               for (i = 0; i < g_total_row; i++) {
+        for (i = 0; i < g_total_row; i++) {
             tmp[i] = g_board[i][col0];
             g_board[i][col0] = g_board[i][col1];
         }
@@ -319,7 +319,7 @@ int copy_row(const color_t color, const size_t src, const size_t dst) /* 원본 
 
         return TRUE;
     } else if (color == COLOR_WHITE) {
-            for (i = 0; i < g_total_col; i++) {
+        for (i = 0; i < g_total_col; i++) {
             g_board[dst][i] = g_board[src][i];
         }
         g_score_player2 -= 4;
