@@ -88,9 +88,12 @@ int place_stone(const color_t color, const size_t row, const size_t col)
 /* special moves */
 int insert_row(const color_t color, const size_t row) 
 {
-    size_t i;
+    int i;
     size_t j;
     if (color == COLOR_BLACK) { /* ���� ���� �������̶�� */
+        if (row >= total_row || row < 0) {
+            return FALSE;
+        }
         if (total_row > 20) { /* �þ ���� ���� 20�� �Ѵ´ٸ� */
             return FALSE;
         }
@@ -133,7 +136,7 @@ int insert_column(const color_t color, const size_t col)
 {
     if (color == COLOR_BLACK) { /* ���� ���� �������̶�� */
         size_t i;
-        size_t j;
+        int j;
 
         if (total_col > 20) { /* col���̰� 20�� �Ѵ´ٸ� */
             return FALSE;
@@ -152,7 +155,7 @@ int insert_column(const color_t color, const size_t col)
         return TRUE;
     } else if (color == COLOR_WHITE) {
         size_t i;
-        size_t j;
+        int j;
 
         if (total_col > 20) { /* col���̰� 20�� �Ѵ´ٸ� */
             return FALSE;
@@ -177,7 +180,8 @@ int insert_column(const color_t color, const size_t col)
 
 int remove_row(const color_t color, const size_t row) 
 { /* ���� �� ���� */
-    size_t i, j;
+    int i;
+    size_t j;
     if (color == COLOR_BLACK) {
         for (i = (int)row + 1; i <= total_row - 1; i++) {
             for (j = 0; j < total_col; j++) {
@@ -205,7 +209,7 @@ int remove_row(const color_t color, const size_t row)
 int remove_column(const color_t color, const size_t col)
 {
     size_t i;
-    size_t j;
+    int j;
     if(col >= total_col || col < 0) {
         return FALSE;
     }
