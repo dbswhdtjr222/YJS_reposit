@@ -4,11 +4,11 @@
 #define TRUE (1)
 #define FALSE (0)
 
-extern size_t total_row;
-extern size_t total_column;
-extern size_t score_player1;
-extern size_t score_player2;
-extern size_t board[20][20];
+extern size_t g_total_row;
+extern size_t g_total_column;
+extern size_t g_score_player1;
+extern size_t g_score_player2;
+extern size_t g_board[20][20];
 
 typedef enum color {COLOR_BLACK, COLOR_WHITE} color_t;
 
