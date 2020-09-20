@@ -48,7 +48,7 @@ int get_score(const color_t color)
 }
 
 int get_color(const size_t row, const size_t col) 
-{ /*�� Ȯ��*/
+{ 
     if (g_board[row][col] == COLOR_BLACK) {
         return 0;
     } else if (g_board[row][col] == COLOR_WHITE) {
@@ -98,12 +98,16 @@ int insert_row(const color_t color, const size_t row)
             return FALSE;
         }
 
-        for (i = (int)g_total_row - 2; i >= (int)row; i--) { 
+        for (i = (int)g_total_row - 1; i >= (int)row; i--) { 
+            if (i < 0) {
+                break;
+            }
             for (j = 0; j < g_total_col; j++) { 
                 g_board[i + 1][j] = g_board[i][j]; 
             }
         }
         for (j = 0; j < g_total_col; j++) { 
+            g_board[row][j] = 13;
         }
         g_total_row += 1;
         g_score_player1 -= 3;
@@ -113,7 +117,10 @@ int insert_row(const color_t color, const size_t row)
             return FALSE;
         }
 
-        for (i = (int)g_total_row - 2; i >= (int)row; i--) { 
+        for (i = (int)g_total_row - 1; i >= (int)row; i--) {
+            if (i < 0) {
+                break;
+            } 
             for (j = 0; j < g_total_col; j++) {
                 g_board[i + 1][j] = g_board[i][j]; 
             }
@@ -141,7 +148,10 @@ int insert_column(const color_t color, const size_t col)
             return FALSE;
         }
         for (i = 0; i < g_total_row; i++) {
-            for (j = (int)g_total_col - 2; j >= (int)col; j--) { 
+            for (j = (int)g_total_col - 1; j >= (int)col; j--) {
+                if (j < 0) {
+                    break;
+                }
                 g_board[i][j + 1] = g_board[i][j]; 
             }
         }
@@ -160,7 +170,10 @@ int insert_column(const color_t color, const size_t col)
             return FALSE;
         }
         for (i = 0; i < g_total_row; i++) { 
-            for (j = (int)g_total_col - 2; j >= (int)col; j--) { 
+            for (j = (int)g_total_col - 1; j >= (int)col; j--) { 
+                if (j < 0) {
+                    break;
+                }
                 g_board[i][j + 1] = g_board[i][j]; 
             }
         }
@@ -177,10 +190,13 @@ int insert_column(const color_t color, const size_t col)
     return 0;
 }
 
-int remove_row(const color_t color, const size_t row) 
+int remove_row(const color_t color, const size_t row)
 { 
     int i;
     size_t j;
+    if (row >= g_total_row || row < 0) {
+        return FALSE;
+    }
     if (color == COLOR_BLACK) {
         for (i = (int)row + 1; i <= (int)g_total_row - 1; i++) {
             for (j = 0; j < g_total_col; j++) {
@@ -214,7 +230,7 @@ int remove_column(const color_t color, const size_t col)
     }
     if (color == COLOR_BLACK) { /* 행 진행하면서 열 값들 앞으로 땡겨주기  */
         for (i = 0; i < g_total_row; i++) {
-            for (j = (int)g_total_col - 2; j >= (int)col; j--) {
+            for (j = (int)g_total_col + 1; j >= (int)col - 1; j++) {
                 g_board[i][j - 1] = g_board[i][j];
             }
         }
@@ -223,7 +239,7 @@ int remove_column(const color_t color, const size_t col)
         return TRUE;
     } else if (color == COLOR_WHITE) {
         for (i = 0; i < g_total_row; i++) {
-            for (j = g_total_col - 2; j >= (int)col; j--) {
+            for (j = g_total_col + 1; j >= (int)col - 1; j++) {
                 g_board[i][j - 1] = g_board[i][j];
             }
         }
