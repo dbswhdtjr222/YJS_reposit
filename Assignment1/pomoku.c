@@ -236,7 +236,7 @@ int remove_column(const color_t color, const size_t col)
     }
     if (color == COLOR_BLACK) { /* 행 진행하면서 열 값들 앞으로 땡겨주기  */
         for (i = 0; i < g_total_row; i++) {
-            for (j = (int)g_total_col + 1; j >= (int)col - 1; j++) {
+            for (j = (int)col + 1; j <= (int)g_total_col - 1; j++) {
                 g_board[i][j - 1] = g_board[i][j];
             }
         }
@@ -245,7 +245,7 @@ int remove_column(const color_t color, const size_t col)
         return TRUE;
     } else if (color == COLOR_WHITE) {
         for (i = 0; i < g_total_row; i++) {
-            for (j = g_total_col + 1; j >= (int)col - 1; j++) {
+            for (j = col + 1; j <= (int)g_total_col - 1; j++) {
                 g_board[i][j - 1] = g_board[i][j];
             }
         }
