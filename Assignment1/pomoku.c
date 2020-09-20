@@ -194,6 +194,9 @@ int remove_row(const color_t color, const size_t row)
 { 
     int i;
     size_t j;
+    if(g_total_row <= 0) {
+        return FALSE;
+    }
     if (row >= g_total_row || row < 0) {
         return FALSE;
     }
@@ -225,6 +228,9 @@ int remove_column(const color_t color, const size_t col)
 {
     size_t i;
     int j;
+    if (g_total_col <= 0) {
+        return FALSE;
+    }
     if (col >= g_total_col || col < 0) {
         return FALSE;
     }
