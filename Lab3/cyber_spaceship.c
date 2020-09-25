@@ -26,7 +26,7 @@ const char* get_longest_safe_zone_or_null(const char* const cab_start_location, 
 		size_t index_info = 0;
         for (i = 0; i < cab_length; i++) { /* cab길이 만큼 하나씩 탐색*/
             for (j = 0; j < cluster_count; j++) {
-                if (cab_start_location + i < cluster_start_locations[i] || cab_start_location + i > cluster_start_locations[j] + cluster_lengths[j]) { /* 안겹칠 때 */
+                if (cab_start_location + i < cluster_start_locations[j] || cab_start_location + i > cluster_start_locations[j] + cluster_lengths[j]) { /* 안겹칠 때 */
                     safe_count++;
                     overlap_count = 0;
                 } else { /* 겹칠 때 */
