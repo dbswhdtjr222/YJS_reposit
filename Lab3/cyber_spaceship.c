@@ -68,7 +68,7 @@ int get_travel_time(const char* const cab_start_location, const size_t cab_lengt
         double result = 0.0;
         for (i = 0; i < cab_length; i++) {
             for (j = 0; j < cluster_count; j++) {
-                if (cab_start_location + i < cluster_start_locations[i] || cab_start_location + i > cluster_start_locations[j] + cluster_lengths[j]) { /* 안겹칠 때 */
+                if (cab_start_location + i < cluster_start_locations[j] || cab_start_location + i > cluster_start_locations[j] + cluster_lengths[j]) { /* 안겹칠 때 */
                     overlap_count = 0; /* 안전지역 */
                 }
                 else { /* 겹칠 때 */
