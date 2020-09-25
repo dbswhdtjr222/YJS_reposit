@@ -7,7 +7,8 @@ const char* get_longest_safe_zone_or_null(const char* const cab_start_location, 
         /* out_longest_safe_area 는 포인터 size_t를 가리키는 */
         *out_longest_safe_area_length = 0; /* 역참조 해서 값을 0으로 설정 */
         return NULL;
-    } else if (cluster_count == 0) { /* cluster의 개수가 0일 때*/
+    }
+    else if (cluster_count == 0) { /* cluster의 개수가 0일 때*/
         size_t i;
         size_t safe_count = 0;
         cluster_start_locations = NULL;
@@ -18,29 +19,28 @@ const char* get_longest_safe_zone_or_null(const char* const cab_start_location, 
         }
         *out_longest_safe_area_length = safe_count;
         return cab_start_location;
-    } else { /* 클러스터가 있고 cab길이가 0이 아닐 때*/
+    }
+    else { /* 클러스터가 있고 cab길이가 0이 아닐 때*/
         size_t i, j;
         size_t safe_count = 0; /*안전거리 카운트*/
         size_t overlap_count = 0; /*클러스터 겹침 카운트*/
         int max = INT_MIN;
-		size_t index_info = 0;
+        size_t index_info = 0;
         for (i = 0; i < cab_length; i++) { /* cab길이 만큼 하나씩 탐색*/
             for (j = 0; j < cluster_count; j++) {
-                if (cab_start_location + i < cluster_start_locations[j] || cab_start_location + i > cluster_start_locations[j] + cluster_lengths[j]) { /* 안겹칠 때 */
-                    safe_count++;
-                    overlap_count = 0;
-                } else { /* 겹칠 때 */
-                    overlap_count++;
+                if (cab_start_location + i >= cluster_start_locations[j] && cab_start_location + i < cluster_start_locations[j] + cluster_lengths[j]) { /* 안겹칠 때 */
+                   overlap_count++;
                 }
             }
-            if (overlap_count % 2 == 0){ /* 겹치는게 짝수 개*/
+            if (overlap_count % 2 == 0) { /* 겹치는게 짝수 개*/
                 safe_count++;
                 if (max < (int)safe_count) { /* 안전거리 최댓값 구하기 */
                     max = safe_count;
                     *out_longest_safe_area_length = (size_t)max;
                     index_info = i;
                 }
-            } else { /*홀수가 나오면 안전거리 카운트 0 */
+            }
+            else { /*홀수가 나오면 안전거리 카운트 0 */
                 safe_count = 0;
             }
             overlap_count = 0; /* 다음 위치의 겹침을 확인 하기 위해 */
