@@ -59,6 +59,7 @@ int get_travel_time(const char* const cab_start_location, const size_t cab_lengt
             safe_count++; /*소행성 x 다 안전구역 */
         }
         result = (double)safe_count / 10;
+        result = result + 0.5;
         return (int)result;
     }
     else { /*소행성 있을 때 */
