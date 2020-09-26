@@ -3,12 +3,11 @@
 
 const char* get_longest_safe_zone_or_null(const char* const cab_start_location, const size_t cab_length, const char* const cluster_start_locations[], const size_t cluster_lengths[], const size_t cluster_count, size_t* out_longest_safe_area_length)
 {
-   if (cab_length == 0) { /* cab의 길이가 0일 때*/
+    if (cab_length == 0) { /* cab의 길이가 0일 때*/
         /* out_longest_safe_area 는 포인터 size_t를 가리키는 */
         *out_longest_safe_area_length = 0; /* 역참조 해서 값을 0으로 설정 */
         return NULL;
-    }
-    else if (cluster_count == 0) { /* cluster의 개수가 0일 때*/
+    } else if (cluster_count == 0) { /* cluster의 개수가 0일 때*/
         size_t i;
         size_t safe_count = 0;
         cluster_start_locations = NULL;
@@ -19,9 +18,9 @@ const char* get_longest_safe_zone_or_null(const char* const cab_start_location, 
         }
         *out_longest_safe_area_length = safe_count;
         return cab_start_location;
-    }
-    else { /* 클러스터가 있고 cab길이가 0이 아닐 때*/
-        size_t i, j;
+    } else { /* 클러스터가 있고 cab길이가 0이 아닐 때*/
+        size_t i;
+        size_t j;
         size_t safe_count = 0; /*안전거리 카운트*/
         size_t overlap_count = 0; /*클러스터 겹침 카운트*/
         int max = INT_MIN;
@@ -29,7 +28,7 @@ const char* get_longest_safe_zone_or_null(const char* const cab_start_location, 
         for (i = 0; i < cab_length; i++) { /* cab길이 만큼 하나씩 탐색*/
             for (j = 0; j < cluster_count; j++) {
                 if (cab_start_location + i >= cluster_start_locations[j] && cab_start_location + i < cluster_start_locations[j] + cluster_lengths[j]) { /* 겹칠 때 */
-                   overlap_count++;
+                    overlap_count++;
                 }
             }
             if (overlap_count % 2 == 0) { /* 겹치는게 짝수 개*/
@@ -39,8 +38,7 @@ const char* get_longest_safe_zone_or_null(const char* const cab_start_location, 
                     *out_longest_safe_area_length = (size_t)max;
                     index_info = i;
                 }
-            }
-            else { /*홀수가 나오면 안전거리 카운트 0 */
+            } else { /*홀수가 나오면 안전거리 카운트 0 */
                 safe_count = 0;
             }
             overlap_count = 0; /* 다음 위치의 겹침을 확인 하기 위해 */
@@ -51,7 +49,7 @@ const char* get_longest_safe_zone_or_null(const char* const cab_start_location, 
 
 int get_travel_time(const char* const cab_start_location, const size_t cab_length, const char* const cluster_start_locations[], const size_t cluster_lengths[], const size_t cluster_count)
 {
-   if (cluster_count == 0) {/* 소행성이 없을 때 */
+    if (cluster_count == 0) {/* 소행성이 없을 때 */
         size_t i;
         size_t safe_count = 0; /*안전구역 카운트*/
         double result = 0; /* double로 계산 */
@@ -61,9 +59,9 @@ int get_travel_time(const char* const cab_start_location, const size_t cab_lengt
         result = (double)safe_count / 10;
         result = result + 0.5;
         return (int)result;
-    }
-    else { /*소행성 있을 때 */
-        size_t i, j;
+    } else { /*소행성 있을 때 */
+        size_t i;
+        size_t j;
         size_t danger_count = 0;
         size_t overlap_count = 0;
         size_t safe_zone_length = 0;
