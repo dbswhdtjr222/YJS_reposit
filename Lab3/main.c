@@ -1,7 +1,10 @@
 #include <assert.h>
+#include <stdio.h>
 #include "cyber_spaceship.h"
 #include "cyber_spaceship.c"
 #define CAB_LENGTH (50)
+
+
 int main(void)
 {
     char cab[CAB_LENGTH];
@@ -37,3 +40,5 @@ int main(void)
 
     return 0;
 }
+
+
