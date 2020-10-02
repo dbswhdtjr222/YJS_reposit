@@ -1,0 +1,133 @@
+#include <limits.h>
+#include <stdio.h>
+#include "my_string.h"
+
+void reverse(char* str)
+{
+	/*if (*str == '\0') {
+	//	return;
+	//}
+	//else {
+	//	reverse(str + 1);
+	//	printf("%c", *str);
+	}*/
+	char temp_char; /*임시 char문자*/
+	size_t i = 0; /*시작 인덱스*/
+	size_t j = 0; /*끝 인덱스*/
+	while (*(str + i) != '\0') {
+		i++;
+	}
+	while (j < i - 1) {
+		temp_char = str[j];
+		str[j] = str[i - 1];
+		str[i - 1] = temp_char;
+		j++;
+		i--;
+	}
+}
+
+int index_of(const char* str, const char* word)
+{
+	size_t word_length = 0u;
+	size_t str_index = 0u;
+	size_t word_count = 0u;
+
+	if (*word == '\0') {
+		return -1;
+	}
+	else {
+		while (*(word + word_length) != '\0') {
+			word_length++;
+		}
+		while (*(str + str_index) != '\0') {
+			if (*(str + str_index) == *(word + word_count)) {
+				word_count++;
+				if (word_count == word_length) {
+					return str_index - word_count + 1;
+				}
+			}
+			else {
+				word_count = 0;
+			}
+			str_index++;
+		}
+	}
+	return -1;
+}
+
+void reverse_by_words(char* str)
+{
+	char temp; /*임시 char문자*/
+	size_t count = 0; /*끝 인덱스*/
+	size_t j = 0; /*현재 인덱스의 위치*/
+	size_t i = 0; /* 시작 인덱스*/
+	while (*(str + j) != '\0') {
+		while (*(str + j) != ' ' && *(str + j) != '\0') {
+			count++;
+			j++;
+		}
+		while (i < count-1) {
+			temp = str[i];
+			str[i] = str[count-1];
+			str[count-1] = temp;
+			i++;
+			count--;
+		}
+		if (*(str + j) == '\0') {
+			break;
+		}
+		j++;
+		i = j;
+		count = j;
+	}
+}
+
+char* tokenize(char* str, const char* delims)
+{
+	static char* current_str; /*위치 저장 변수*/
+	size_t i;
+	if (str == NULL) {
+		str = ++current_str;
+	} else {
+		current_str = str;
+	}
+	while (*current_str != '\0') {
+		i = 0;
+		while (*(delims + i) != '\0') {
+			if (*(delims + i) == *current_str) {
+				*current_str = '\0'; /* 직접 str의 값에 가서 null문자로 바꿔줌 */
+				return str;
+			}
+			i++;
+		}
+		current_str++;
+	}
+
+	return str;
+}
+
+char* reverse_tokenize(char* str, const char* delims)
+{
+	static char* current_str; /*위치 저장 변수*/
+	size_t i;
+	if (str == NULL) {
+		str = ++current_str;
+	}
+	else {
+		current_str = str;
+	}
+	while (*current_str != '\0') {
+		i = 0;
+		while (*(delims + i) != '\0') {
+			if (*(delims + i) == *current_str) {
+				*current_str = '\0'; /* 직접 str의 값에 가서 null문자로 바꿔줌 */
+				reverse(str);
+				return str;
+			}
+			i++;
+		}
+		current_str++;
+	}
+
+	return str;
+}
