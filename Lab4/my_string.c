@@ -4,13 +4,16 @@
 
 void reverse(char* str)
 {
-	/*if (*str == '\0') {
+	//if (*str == '\0') {
 	//	return;
 	//}
 	//else {
 	//	reverse(str + 1);
 	//	printf("%c", *str);
-	}*/
+	//}
+	if (*str == '\0') {
+		return;
+	}
 	char temp_char; /*임시 char문자*/
 	size_t i = 0; /*시작 인덱스*/
 	size_t j = 0; /*끝 인덱스*/
@@ -32,8 +35,8 @@ int index_of(const char* str, const char* word)
 	size_t str_index = 0u;
 	size_t word_count = 0u;
 
-	if (*word == '\0') {
-		return -1;
+	if (*word == 0) {
+		return 0;
 	}
 	else {
 		while (*(word + word_length) != '\0') {
@@ -84,50 +87,81 @@ void reverse_by_words(char* str)
 
 char* tokenize(char* str, const char* delims)
 {
-	static char* current_str; /*위치 저장 변수*/
-	size_t i;
-	if (str == NULL) {
-		str = ++current_str;
-	} else {
-		current_str = str;
-	}
-	while (*current_str != '\0') {
-		i = 0;
-		while (*(delims + i) != '\0') {
-			if (*(delims + i) == *current_str) {
-				*current_str = '\0'; /* 직접 str의 값에 가서 null문자로 바꿔줌 */
-				return str;
-			}
-			i++;
-		}
-		current_str++;
-	}
+	static char* current_str;
+	size_t i = 0;
+	size_t j = 0;
 
-	return str;
-}
-
-char* reverse_tokenize(char* str, const char* delims)
-{
-	static char* current_str; /*위치 저장 변수*/
-	size_t i;
 	if (str == NULL) {
-		str = ++current_str;
+		str = current_str;
 	}
 	else {
 		current_str = str;
 	}
 	while (*current_str != '\0') {
-		i = 0;
 		while (*(delims + i) != '\0') {
-			if (*(delims + i) == *current_str) {
-				*current_str = '\0'; /* 직접 str의 값에 가서 null문자로 바꿔줌 */
-				reverse(str);
-				return str;
+			if (*current_str == *(delims + i)) {
+				*current_str = '\0';
+				current_str++;
+				goto there;
 			}
 			i++;
 		}
 		current_str++;
+		i = 0;
 	}
+there:
+	while (*(delims + j) != '\0') {
+		if (*current_str == *(delims + j)) {
+			while (*current_str == *(delims + j)) {
+				current_str++;
+			}
+			return str;
+		}
+		j++;
+	}
+	if (*current_str == 0) {
+		return NULL;
+	}
+	return str;
+}
 
+char* reverse_tokenize(char* str, const char* delims)
+{
+	static char* current_str;
+	size_t i = 0;
+	size_t j = 0;
+
+	if (str == NULL) {
+		str = current_str;
+	}
+	else {
+		current_str = str;
+	}
+	while (*current_str != '\0') {
+		while (*(delims + i) != '\0') {
+			if (*current_str == *(delims + i)) {
+				*current_str = '\0';
+				current_str++;
+				reverse(str);
+				goto there;
+			}
+			i++;
+		}
+		current_str++;
+		i = 0;
+	}
+there:
+	while (*(delims + j) != '\0') {
+		if (*current_str == *(delims + j)) {
+			while (*current_str == *(delims + j)) {
+				current_str++;
+			}
+			return str;
+		}
+		j++;
+	}
+	if (*current_str == 0) {
+		return NULL;
+	}
 	return str;
 }
