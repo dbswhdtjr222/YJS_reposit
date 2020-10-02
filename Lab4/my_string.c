@@ -4,6 +4,9 @@
 
 void reverse(char* str)
 {
+	char temp_char;  /* 임시 char문자 */
+	size_t i = 0; /*시작 인덱스*/
+	size_t j = 0; /*끝 인덱스*/
 	//if (*str == '\0') {
 	//	return;
 	//}
@@ -14,9 +17,6 @@ void reverse(char* str)
 	if (*str == '\0') {
 		return;
 	}
-	char temp_char; /*임시 char문자*/
-	size_t i = 0; /*시작 인덱스*/
-	size_t j = 0; /*끝 인덱스*/
 	while (*(str + i) != '\0') {
 		i++;
 	}
