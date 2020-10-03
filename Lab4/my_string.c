@@ -91,18 +91,24 @@ char* tokenize(char* str, const char* delims)
 {
 	static char* current_str;
 	size_t i = 0;
-	if (str == NULL){
+	size_t j = 0;
+	if (str == NULL) {
 		str = current_str;
-	} else {
+	}
+	else {
 		current_str = str;
 	}
 	while (*(delims + i) != '\0') {
-		if (*current_str == *(delims + i)) {
-			while (*current_str == *(delims + i)) {
+		while (*(delims + j) != '\0') {
+			if (*current_str == *(delims + j)) {
 				*current_str = '\0';
-				current_str++;
 			}
+			j++;
 		}
+		if (*current_str == '\0') {
+			current_str++;
+		}
+		j = 0;
 		i++;
 	}
 	i = 0;
@@ -129,18 +135,24 @@ char* reverse_tokenize(char* str, const char* delims)
 {
 	static char* current_str;
 	size_t i = 0;
-	if (str == NULL){
+	size_t j = 0;
+	if (str == NULL) {
 		str = current_str;
-	} else {
+	}
+	else {
 		current_str = str;
 	}
 	while (*(delims + i) != '\0') {
-		if (*current_str == *(delims + i)) {
-			while (*current_str == *(delims + i)) {
+		while (*(delims + j) != '\0') {
+			if (*current_str == *(delims + j)) {
 				*current_str = '\0';
-				current_str++;
 			}
+			j++;
 		}
+		if (*current_str == '\0') {
+			current_str++;
+		}
+		j = 0;
 		i++;
 	}
 	i = 0;
