@@ -35,10 +35,11 @@ int index_of(const char* str, const char* word)
 	size_t str_index = 0u;
 	size_t word_count = 0u;
 
-	if (*word == 0) {
+	if (*word == '\0') {
 		return 0;
-	}
-	else {
+	} else if (*str == '\0') {
+		return -1;
+	} else {
 		while (*(word + word_length) != '\0') {
 			word_length++;
 		}
@@ -46,7 +47,8 @@ int index_of(const char* str, const char* word)
 			if (*(str + str_index) == *(word + word_count)) {
 				word_count++;
 				if (word_count == word_length) {
-					return str_index - word_count + 1;
+					str_index++;
+					return str_index - word_count;
 				}
 			}
 			else {
