@@ -125,7 +125,7 @@ char* tokenize(char* str, const char* delims)
 	return str;
 }
 
-char* tokenize(char* str, const char* delims)
+char* reverse_tokenize(char* str, const char* delims)
 {
 	static char* current_str;
 	size_t i = 0;
@@ -150,7 +150,7 @@ char* tokenize(char* str, const char* delims)
 			if (*current_str == *(delims + i)) {
 				*current_str = '\0';
 				current_str++;
-				revers(str);
+				reverse(str);
 				return str;
 			}
 			i++;
