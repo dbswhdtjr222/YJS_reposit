@@ -35,32 +35,36 @@ void reverse(char* str)
 int index_of(const char* str, const char* word)
 {
 	size_t word_length = 0u;
-	size_t str_index = 0u;
-	size_t word_count = 0u;
+	size_t count = 0u;
+	size_t i = 0u;
+	size_t j = 0u;
 
 	if (*word == '\0') {
 		return 0;
 	} else if (*str == '\0') {
 		return -1;
 	} else {
-		while (*(word + word_length) != '\0') {
+		while (*(word + i) != '\0') {
 			word_length++;
+			i++;
 		}
-		while (*(str + str_index) != '\0') {
-			if (*(str + str_index) == *(word + word_count)) {
-				word_count++;
-				if (word_count == word_length) {
-					str_index++;
-					return str_index - word_count;
+		i = 0;
+		while (*(str + i) != '\0') {
+			if (*(str + i) == *word) {
+				for (j = 0; j < word_length; j++) {
+					if (*(str + i + j) == *(word + j)) {
+						count++;
+					}
+					if (count == word_length) {
+						return i;
+					}
 				}
+				j = 0;
+				count = 0;
 			}
-			else {
-				word_count = 0;
-			}
-			str_index++;
+			i++;
 		}
 	}
-	return -1;
 }
 
 void reverse_by_words(char* str)
