@@ -64,6 +64,7 @@ int index_of(const char* str, const char* word)
 			}
 			i++;
 		}
+		return -1;
 	}
 }
 
