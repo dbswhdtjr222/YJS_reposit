@@ -106,6 +106,9 @@ char* tokenize(char* str, const char* delims)
 		current_str = str;
 	}
 
+	if (current_str == NULL) {
+		return NULL;
+	}
 	if (*current_str == '\0') {
 		return NULL;
 	}
@@ -150,6 +153,9 @@ char* reverse_tokenize(char* str, const char* delims)
 		current_str = str;
 	}
 	
+	if (current_str == NULL) {
+		return NULL;
+	}
 	if (*current_str == '\0') {
 		return NULL;
 	}
@@ -179,6 +185,9 @@ char* reverse_tokenize(char* str, const char* delims)
 			i++;
 		}
 		current_str++;
+		if (*current_str == '\0') {
+			reverse(str);
+		}
 		i = 0;
 	}
 
